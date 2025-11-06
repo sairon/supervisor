@@ -112,10 +112,16 @@ jobs:
           requirements: "requirements.txt"
           test: true
 
-      - name: Meh
+      - name: HACK - figure out where wheels are saved
+        id: find_wheel_dir
         run: |
           ls -la
           ls -la *
+          # find first directory which contains *.whl files
+          whl_dir=$(find /tmp/tmp* -type f -name "*.whl" -exec dirname {} \; | head -n 1)
+          echo "wheel_dir=${whl_dir}" >> "$GITHUB_OUTPUT"
+          echo "WHEEL_DIR=${whl_dir}"
+          ls -la ${whl_dir}
           exit 1
 
       - name: Set version
