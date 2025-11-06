@@ -117,6 +117,13 @@ jobs:
           skip-binary: aiohttp
           env-file: true
           requirements: "requirements.txt"
+          test: true
+
+      - name: Meh
+        run: |
+          ls -la
+          ls -la *
+          exit 1
 
       - name: Set version
         if: needs.init.outputs.publish == 'true'
